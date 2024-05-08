@@ -1,4 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
 * {
   margin: 0;
@@ -11,9 +11,6 @@ button {
   font: inherit;
 }
 
-html {
-  font-size: 1.5rem;
-}
 
 body {
   font-family: 'Nunito', sans-serif;
@@ -100,4 +97,4 @@ header {
     padding-right: 0.5em;
     font-size: 3rem;
   }
-} */
+}

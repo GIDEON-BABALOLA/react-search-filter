@@ -1,44 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-/* 
 import React, {useEffect, useState} from 'react'
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
@@ -55,6 +14,7 @@ const SecondPage = () => {
   useEffect(() => {
     getAllUsers().then((data) => {
       setUsers(data)
+      console.log(data)
       return data
     }).then((data) => {
       setSearchResult(data)
@@ -65,23 +25,24 @@ const SecondPage = () => {
       setSearchResult(resultsArray(searchInput))
  }
  const handleSearchChange = (e) => { 
-     const value = e.target.value.trim()
-     setSearchInput(e.target.value)
+  const value = e.target.value.trim()
+  const search  = new RegExp(value, "i")
+     setSearchInput(value)
      if(!value){
          return setSearchResult(users)
      }else{
          setSearchResult(searchArray(value))
      }
  }
-    const searchArray = (value) => {
+    const searchArray = (search) => {
       //Merge Array without repeating the elements in the array more than once
       const mergeArray = (news, olds) => [...new Set([...news, ...olds])]
-      return mergeArray(resultsArray(value), users)
+      return mergeArray(resultsArray(search), users)
   }
-  const resultsArray = (value) => {
-      const resultsArray = users.filter((users) => users.firstname.includes(value) 
-      || users.lastname.includes(value) || users.email.includes(value) || users.mobile.includes(value)
-      || users._id.includes(value)) //Returns Boolean
+  const resultsArray =  (search) => {
+      const resultsArray = users.filter((users) =>users.firstname.includes(search) 
+      || users.lastname.includes(search) || users.email.includes(search) || users.mobile.includes(search)
+      ) //Returns Boolean
   return resultsArray
 
   }
@@ -95,7 +56,7 @@ const SecondPage = () => {
         <td>{user._id}</td>
       </tr>
        )
-       const content = results?.length !== 0 ? results : <tr>No Matching User</tr>
+       const content = results?.length !== 0 ? results : <h6 className='text-center mt-4'>No Matching User</h6>
        return content
    }
   return <div className='App'>
@@ -103,7 +64,7 @@ const SecondPage = () => {
     <h1 className='text-center mt-4'>Users Database</h1>
     <Form onSubmit={handleSubmit}>
       <InputGroup className="my-3">
-        <Form.Control placeholder="Search Users" onChange={handleSearchChange}></Form.Control>
+        <Form.Control placeholder="Enter Firstname, lastname or phone number" onChange={handleSearchChange} className='form-control'></Form.Control>
         <button style={{backgroundColor : "black", color : "white", border: "none", outline : "none", paddingLeft : "2%", paddingRight : "2%"}}> 
              <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon></button>
       </InputGroup>
@@ -128,4 +89,4 @@ const SecondPage = () => {
   
 }
 
-export default SecondPage */
+export default SecondPage
